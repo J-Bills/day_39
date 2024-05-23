@@ -18,6 +18,18 @@ class FlightData:
         self.data = self.response.json()
         self.price_list = self.data['data']['flights']
         
+    def find_min_price(self):
+        flightprices = [price for (day,price) in self.price_list]
+        cheapest = min(flightprices)
+        return cheapest
+    
+    def get_key_by_value(self, cheapest):
+        for key, value in self.price_list.items():
+            if value == cheapest:
+                return key
+        # If the search value is not found, return None or raise an exception
+        return None 
+        
         # return self.price_list
         
         
