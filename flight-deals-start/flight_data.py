@@ -1,11 +1,12 @@
 import requests
 class FlightData:
     
-    def __init__(self, skyID:str, origID:str, startdate, enddate) -> None:
+    def __init__(self, destID:str, origID:str, startdate, enddate) -> list:
         #This class is responsible for talking to the Flight Search API.
         self.url = "https://sky-scrapper.p.rapidapi.com/api/v1/flights/getPriceCalendar"
-        self.querystring = {"originSkyId":origID,"destinationSkyId":skyID,"fromDate":startdate, 'toDate':enddate}
-        self.skyID = skyID
+        self.destID = destID
+        self.origID = origID
+        self.querystring = {"originSkyId":origID, "destinationSkyId":destID, "fromDate":startdate, 'toDate':enddate}
         
 
         self.headers = {
@@ -15,9 +16,9 @@ class FlightData:
 
         self.response = requests.get(self.url, headers=self.headers,params=self.querystring)
         self.data = self.response.json()
-        self.price_list = self.data['data']['flights']['days']
+        self.price_list = self.data['data']['flights']
         
-        return self.price_list
+        # return self.price_list
         
         
         

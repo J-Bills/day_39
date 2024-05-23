@@ -12,8 +12,7 @@ class FlightSearch:
         self.url = "https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport"
         self.origID = ''
         self.destID = ''
-        self.querystring= {"q":city}
-        
+        self.querystring= {"query":city} 
 
         self.headers = {
 	        "X-RapidAPI-Key": "f4cc4e8583mshc827b1dea0c7bf1p117c4ajsn2f9dab7ef1bf",
@@ -22,12 +21,14 @@ class FlightSearch:
         
         global home_set
 
-        if not home_set:
-            self.response = requests.get(self.url, headers=self.headers,params=self.querystring_home)
-            self.data = self.response.json()
-            self.origID = self.data['data'][0]['navigation']['relevantFlightParams']
-            home_set = True
+        # if not home_set:
+        #     self.response = requests.get(self.url, headers=self.headers,params=self.querystring)
+        #     self.response.raise_for_status()
+        #     self.data = self.response.json()
+        #     print(self.data)
+        #     self.origID = self.data['data'][0]['navigation']['relevantFlightParams']
+        #     home_set = True
         
-        self.response = requests.get(self.url, headers=self.headers,params=self.querystring_home)
-        self.data = self.response.json()
-        self.destID = self.data['data'][0]['navigation']['relevantFlightParams']
+        # self.response = requests.get(self.url, headers=self.headers,params=self.querystring)
+        # self.data = self.response.json()
+        # self.destID = self.data['data'][0]['navigation']['relevantFlightParams']
